@@ -49,7 +49,11 @@ namespace SYXSENSE_Test_WebService
 
         private void CleanUpSuspendedMachines()
         {
-
+            foreach(var m in _machines)
+            {
+                if (m.IsSuspended())
+                    RemoveRemoteMachine(m);
+            }
         }
 
         private void CollectData()

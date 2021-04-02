@@ -17,6 +17,7 @@ namespace SYXSENSE_Test_WebService
         private string _netVersion = null;
         private string _localZone = null;
         private string _lastTimeOnline = null;
+        private bool _isSuspended = false;
         
         #endregion
 
@@ -28,6 +29,16 @@ namespace SYXSENSE_Test_WebService
         {
             _httpListenerContext = listenerContext;
             ProcessRequest(_httpListenerContext);
+        }
+
+        public void Suspend()
+        {
+            _isSuspended = true;
+        }
+
+        public bool IsSuspended()
+        {
+            return _isSuspended
         }
 
         public async void GetDataFromRemoteMachine()
@@ -98,7 +109,8 @@ namespace SYXSENSE_Test_WebService
             }
             catch (WebSocketException e)
             {
-                Server.RemoveRemoteMachine(this);
+                _lastTimeOnline = DateTime.Now.ToString();
+                //Server.RemoveRemoteMachine(this);
             }
             catch (Exception e)
             {
