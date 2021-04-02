@@ -1,0 +1,8 @@
+*.exe
+*.dll
+*.cache
+packages/*
+.vs
+**/Debug
+**/PublishProfiles
+**/Release
